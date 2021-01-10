@@ -49,16 +49,12 @@
     <Compile Include="Circle.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="LList.cs" />
-    <Compile Include="Main%28SEMLINKEDLIST%29.cs" />
-    <Compile Include="Main%28SEMLINKEDLIST%29.Designer.cs">
-      <DependentUpon>Main%28SEMLINKEDLIST%29.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Main.cs" />
+    <Compile Include="Main.Designer.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Main%28SEMLINKEDLIST%29.resx">
-      <DependentUpon>Main%28SEMLINKEDLIST%29.cs</DependentUpon>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

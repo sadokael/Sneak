@@ -28,7 +28,7 @@ namespace Sneak
         {
             Width = 16;
             Height = 16;
-            Speed = 8;
+            Speed = 7;
             Score = 0;
             Points = 100;
             Gameover = false;
