@@ -1,0 +1,10 @@
+K:\Vs_projects\Sneak\bin\Debug\Sneak.exe.config
+K:\Vs_projects\Sneak\bin\Debug\Sneak.exe
+K:\Vs_projects\Sneak\bin\Debug\Sneak.pdb
+K:\Vs_projects\Sneak\obj\Debug\Sneak.csprojAssemblyReference.cache
+K:\Vs_projects\Sneak\obj\Debug\Sneak.Properties.Resources.resources
+K:\Vs_projects\Sneak\obj\Debug\Sneak.csproj.GenerateResource.cache
+K:\Vs_projects\Sneak\obj\Debug\Sneak.csproj.CoreCompileInputs.cache
+K:\Vs_projects\Sneak\obj\Debug\Sneak.exe
+K:\Vs_projects\Sneak\obj\Debug\Sneak.pdb
+K:\Vs_projects\Sneak\obj\Debug\Sneak.SneakGame.resources
