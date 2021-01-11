@@ -90,24 +90,24 @@ namespace Sneak
                  
                 
                 
-                    Node temp = Snake.head.next;
-                    do
+                Node temp = Snake.head.next;
+                do
+                {
+                    if (temp == null)
                     {
-                        if (temp == null)
-                        {
-                            break;
-                        }
-                        canvas.FillEllipse(Brushes.Green,
+                        break;
+                    }
+                    canvas.FillEllipse(Brushes.Green,
                                           new Rectangle(
-                                              temp.body.X * Options.Width,      //tamanho
-                                              temp.body.Y * Options.Height,     //tamanho   
-                                              Options.Width, Options.Height)   //start pos
+                                          temp.body.X * Options.Width,      //tamanho
+                                          temp.body.Y * Options.Height,     //tamanho   
+                                          Options.Width, Options.Height)   //start pos
                                           );
                         
-                        temp = temp.next;
+                    temp = temp.next;
 
 
-                    } while (1 == 1);
+                } while (1 == 1);
                 
                
 
