@@ -126,10 +126,11 @@ namespace Sneak
         {
             EndGame.Visible = false; //esconde a label de Gameover
             new Options();
-            Snake.head.next = null; //limpa a array
+            Snake.head.next = null; //limpa a LList
             Snake.head.body.X = 10; //primeiro elem da lista
             Snake.head.body.Y = 5;
-          
+            AddNode(Snake.head.body.X, Snake.head.body.Y); //no idea, mas assim corre, so...
+
 
             L_score.Text = Options.Score.ToString(); //passa string com score á label
 
@@ -160,25 +161,19 @@ namespace Sneak
                 if (Snake.head.body.X < 0 || Snake.head.body.Y < 0 || Snake.head.body.X > MaxX || Snake.head.body.Y > MaxY)
                 { end(); } //gameover se snake tocar nas bordas
 
-                //colisão com outros elementos da array
-              
-                
 
+
+                //colisão com outros elementos da lista                           
                 Node temp = Snake.head.next;
-                do
+                while(temp == null); 
                 {
+                  
+                    if (Snake.head.body.X == temp.body.X && Snake.head.body.Y == temp.body.Y)
+                    { end(); } //gameover se houver colisão
 
-                    if (temp == null)
-                    {
-                        break;
-                    }
+                    temp = temp.next;
 
-                        if (Snake.head.body.X == temp.body.X && Snake.head.body.Y == temp.body.Y)
-                        { end(); } //gameover se houver colisão
-
-                        temp = temp.next;
-
-                } while (1 == 1);
+                } 
                 
 
 
