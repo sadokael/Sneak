@@ -72,9 +72,7 @@ namespace Sneak
          
 
             if(Options.Gameover == false)
-            {
-                Snake.getHead();
-
+            {              
                 canvas.FillEllipse(Brushes.Black,
                                        new Rectangle(
                                            dot.X * Options.Width,
@@ -84,23 +82,34 @@ namespace Sneak
                 
                 canvas.FillEllipse(Brushes.DarkGreen,
                                                new Rectangle(
-                                               (Snake.getX()) * Options.Width,      //tamanho
-                                               (Snake.getY()) * Options.Height,     //tamanho   
+                                               Snake.head.body.X * Options.Width,      //tamanho
+                                               Snake.head.body.Y * Options.Height,     //tamanho   
                                                Options.Width, Options.Height)   //start pos
                                                               );
 
+                 
+                
+                
+                    Node temp = Snake.head.next;
+                    do
+                    {
+                        if (temp == null)
+                        {
+                            break;
+                        }
+                        canvas.FillEllipse(Brushes.Green,
+                                          new Rectangle(
+                                              temp.body.X * Options.Width,      //tamanho
+                                              temp.body.Y * Options.Height,     //tamanho   
+                                              Options.Width, Options.Height)   //start pos
+                                          );
+                        
+                        temp = temp.next;
 
-                do
-                {
-                    Snake.getBefore();
 
-                    canvas.FillEllipse(Brushes.Green,
-                                      new Rectangle(
-                                          (Snake.getX()) * Options.Width,      //tamanho
-                                          (Snake.getY()) * Options.Height,     //tamanho   
-                                          Options.Width, Options.Height)   //start pos
-                                      );
-                } while (Snake.getBefore() != null);
+                    } while (1 == 1);
+                
+               
 
 
             }
@@ -117,10 +126,10 @@ namespace Sneak
         {
             EndGame.Visible = false; //esconde a label de Gameover
             new Options();
-            Snake.ClearList(); //limpa a array
-            Snake.setX(10); //primeiro elem da array
-            Snake.setY(5);
-            
+            Snake.head.next = null; //limpa a array
+            Snake.head.body.X = 10; //primeiro elem da lista
+            Snake.head.body.Y = 5;
+          
 
             L_score.Text = Options.Score.ToString(); //passa string com score á label
 
@@ -128,64 +137,83 @@ namespace Sneak
         }
 
         private void MovePlayer()
-        {
-            Snake.getHead();
-
-                    
+        {                  
                 switch (Options.direction)
                 {
                     case Directions.Down:
-                        Snake.incY();
+                        Snake.head.body.Y++;
                         break;
                     case Directions.Up:
-                        Snake.decY();
+                        Snake.head.body.Y--; 
                         break;
                     case Directions.Left:
-                        Snake.decX();
+                        Snake.head.body.X--;
                         break;
                     case Directions.Rigth:
-                        Snake.incX();
+                        Snake.head.body.X++;
                         break;
                 }
                 //limites:
                 int MaxX = PB_Canvas.Size.Width / Options.Width;
                 int MaxY = PB_Canvas.Size.Height / Options.Height;
 
-                if (Snake.getCurr().X < 0 || Snake.getY() < 0 || Snake.getX() > MaxX || Snake.getY() > MaxY)
+                if (Snake.head.body.X < 0 || Snake.head.body.Y < 0 || Snake.head.body.X > MaxX || Snake.head.body.Y > MaxY)
                 { end(); } //gameover se snake tocar nas bordas
 
                 //colisão com outros elementos da array
-                while (Snake.getBefore() != null)
+              
+                
+
+                Node temp = Snake.head.next;
+                do
                 {
-                    if (Snake.getCurr().X == Snake.getBefore().X && Snake.getCurr().Y == Snake.getBefore().Y)
-                    { end(); } //gameover se houver colisão
 
-                    Snake.getBefore();
+                    if (temp == null)
+                    {
+                        break;
+                    }
 
-                }
+                        if (Snake.head.body.X == temp.body.X && Snake.head.body.Y == temp.body.Y)
+                        { end(); } //gameover se houver colisão
 
-            Snake.getHead();
+                        temp = temp.next;
 
-            //colisão com dots ________ cabeça == Snake[0] (primeiro elem)
-            if (Snake.getCurr().X == dot.X && Snake.getCurr().Y == dot.Y)
+                } while (1 == 1);
+                
+
+
+                //colisão com dots ________ cabeça == Snake[0] (primeiro elem)
+                if (Snake.head.body.X == dot.X && Snake.head.body.Y == dot.Y)
                 { eat(); } //adiciona elem á array
 
 
 
-            if(Snake.getBefore() != null)
-            {
+
+
+                temp = Snake.head.next;
                 do
                 {
-                    Snake.getBefore().X = Snake.getCurr().X;//assume pos do anterior
-                    Snake.getBefore().Y = Snake.getCurr().Y;//idem
-                } while (Snake.getBefore() != null) ;
+                
+                if (temp == null)
+                {
+                    
+                    break;
+                }
+                else if (temp.next == null)
+                {
+                    //só deve correr 1x
+                    temp.body.X = Snake.head.body.X;
+                    temp.body.Y = Snake.head.body.Y;
+                    break;
+                }
+                
+                temp.body.X = temp.next.body.X;//assume pos do anterior
+                temp.body.Y = temp.next.body.Y;//assume pos do anterior
 
-            }
-            
-            
-            
+                temp = temp.next;
 
-            
+                } while (1 == 1);
+                                                         
         }
 
         private void generateDots()
@@ -198,11 +226,9 @@ namespace Sneak
 
         private void eat()
         {
-            
-            Snake.AddNode();
-            Snake.getCurr();
-            Snake.setX(Snake.getNext().X);
-            Snake.setY(Snake.getNext().Y);
+           
+            AddNode(Snake.head.body.X, Snake.head.body.Y);
+
             Options.Score += Options.Points;
             L_score.Text = Options.Score.ToString();
             generateDots();
@@ -212,7 +238,16 @@ namespace Sneak
             Options.Gameover = true;
         }
 
-        
+        public void AddNode(int x, int y)
+        {
+            Node newNode = new Node();
+            newNode.body.X = x;
+            newNode.body.Y = y;
+
+            newNode.next = Snake.head;
+            Snake.head = newNode;
+        }
+
 
     }
 }
