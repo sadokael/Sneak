@@ -9,7 +9,7 @@ namespace Sneak
     public enum Directions
     {
         Left,
-        Rigth,
+        Right,
         Up,
         Down
     };

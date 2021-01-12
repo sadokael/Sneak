@@ -38,10 +38,10 @@ namespace Sneak
                 }
                 else
                 {
-                    if (Input.keyPress(Keys.Left) && Options.direction != Directions.Rigth)
+                    if (Input.keyPress(Keys.Left) && Options.direction != Directions.Right)
                     { Options.direction = Directions.Left; }
                     if (Input.keyPress(Keys.Right) && Options.direction != Directions.Left)
-                    { Options.direction = Directions.Rigth; }
+                    { Options.direction = Directions.Right; }
                     if (Input.keyPress(Keys.Up) && Options.direction != Directions.Down)
                     { Options.direction = Directions.Up; }
                     if (Input.keyPress(Keys.Down) && Options.direction != Directions.Up)
@@ -150,7 +150,7 @@ namespace Sneak
                     case Directions.Left:
                         Snake.head.body.X--;
                         break;
-                    case Directions.Rigth:
+                    case Directions.Right:
                         Snake.head.body.X++;
                         break;
                 }
